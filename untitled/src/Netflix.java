@@ -166,8 +166,34 @@ public class Netflix {
         return user;
     }
 
-    private boolean isStrongPassword(String password) {
-        return true;
+      private boolean isStrongPassword(String password) {
+        return password.length() >= 6 && containsDigit(password) && containsEnglishLetter(password);
+    }
+
+    private boolean containsDigit (String password) {
+        boolean contains = false;
+        for (int i = 0; i < password.length(); i++) {
+            char currentChar = password.charAt(i);
+            for (int digit = 0; digit <=9 ; digit++) {
+                if (currentChar - 'a' == digit) {
+                    contains = true;
+                    break;
+                }
+            }
+        }
+        return contains;
+    }
+
+    private boolean containsEnglishLetter (String password) {
+        boolean exists = false;
+        final String[] LETTERS = {"A", "B", "C", "D", "E", "F", "G"};
+        for (int i = 0; i < LETTERS.length; i++) {
+            if (password.contains(LETTERS[i])) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
     }
 
     private User createRandomUser() {
